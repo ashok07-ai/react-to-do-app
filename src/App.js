@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Footer } from "./components/Footer";
+import Header from "./components/Header";
+import Todo from "./components/Todo";
 
 function App() {
+  const onDelete = (todo) => {
+    setTodos(todosDatas.filter((e) => {
+      return e !== todo
+    }));
+  }
+  const [todosDatas, setTodos] = useState([
+    {
+      sno: 1,
+      title: "Artificial Intelligence",
+      description: "This is info about Artificial Intelligence"
+    },
+    {
+      sno: 2,
+      title: "Machine Learning",
+      description: "This is info about Machine Learning"
+    },
+    {
+      sno: 3,
+      title: "Data Science",
+      description: "This is info about Data Science"
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header title="To-Do-List" searchBar={false} />
+      <Todo todoDatas={todosDatas} deleteData={onDelete} />
+      <Footer />
+    </>
   );
 }
 
